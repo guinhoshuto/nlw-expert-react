@@ -4,11 +4,13 @@ import { ptBR } from "date-fns/locale"
 import { X } from "lucide-react"
 
 interface NoteCardProps {
+    id: number,
     date: Date,
-    content: string
+    content: string,
+    onNoteDeleted: (id: number) => void
 }
 
-export function NoteCard({ date, content}: NoteCardProps){
+export function NoteCard({ date, content, id, onNoteDeleted}: NoteCardProps){
     return(
         <Dialog.Root>
             <Dialog.Trigger className='rounded-md text-left bg-slate-800 p-5 flex flex-col gap-3 overflow-hidden relative outline-none hover:ring-2 ring-slate-600 focus-visible:ring-lime-400'>
@@ -31,6 +33,7 @@ export function NoteCard({ date, content}: NoteCardProps){
                         </div>
                         <button 
                             type="button" 
+                            onClick={() => onNoteDeleted(id)}
                             className="w-full bg-slate-800 font-medium py-4 text-center text-sm text-slate-300 outline-none group"
                         >
                             Deseja <span className="text-red-400 group-hover:underline"> apagar essa nota</span>?
